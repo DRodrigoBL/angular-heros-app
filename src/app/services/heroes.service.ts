@@ -36,7 +36,9 @@ export class HeroesService {
     {
       nombre: 'Hulk',
       bio:
-        'Su principal poder es su capacidad de aumentar su fuerza hasta niveles prácticamente ilimitados a la vez que aumenta su furia. Dependiendo de qué personalidad de Hulk esté al mando en ese momento (el Hulk Banner es el más débil, pero lo compensa con su inteligencia).',
+        'Su principal poder es su capacidad de aumentar su fuerza hasta niveles prácticamente ' +
+        'ilimitados a la vez que aumenta su furia. Dependiendo de qué personalidad de Hulk esté ' +
+        'al mando en ese momento (el Hulk Banner es el más débil, pero lo compensa con su inteligencia).',
       img: 'assets/img/hulk.png',
       aparicion: '1962-05-01',
       casa: 'Marvel'
@@ -44,7 +46,11 @@ export class HeroesService {
     {
       nombre: 'Linterna Verde',
       bio:
-        'Poseedor del anillo de poder que posee la capacidad de crear manifestaciones de luz sólida mediante la utilización del pensamiento. Es alimentado por la Llama Verde (revisada por escritores posteriores como un poder místico llamado Starheart), una llama mágica contenida en dentro de un orbe (el orbe era en realidad un meteorito verde de metal que cayó a la Tierra, el cual encontró un fabricante de lámparas llamado Chang)',
+        'Poseedor del anillo de poder que posee la capacidad de crear manifestaciones de luz sólida ' +
+        'mediante la utilización del pensamiento. Es alimentado por la Llama Verde (revisada por ' +
+        'escritores posteriores como un poder místico llamado Starheart), una llama mágica ' +
+        'contenida en dentro de un orbe (el orbe era en realidad un meteorito verde de metal ' +
+        'que cayó a la Tierra, el cual encontró un fabricante de lámparas llamado Chang)',
       img: 'assets/img/linterna-verde.png',
       aparicion: '1940-06-01',
       casa: 'DC'
@@ -85,6 +91,20 @@ export class HeroesService {
 
   getHero(heroId: number): Hero {
     return this.heroes[heroId];
+  }
+
+  searchHeroes(heroName: string): Hero[]{
+
+    let foundHeros: Hero[] = [];
+    let heroNameLowerCase = heroName.toLocaleLowerCase();
+
+    for (let hero of this.heroes) {
+      let currentHeroName = hero.nombre.toLocaleLowerCase();
+      if (currentHeroName.indexOf(heroNameLowerCase) >= 0) {
+        foundHeros.push(hero);
+      }
+    }
+    return foundHeros;
   }
 
 }
